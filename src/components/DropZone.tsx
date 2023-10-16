@@ -15,14 +15,14 @@ const StyledDropZone = styled.div<StyledDropZoneProps>`
   border-color: ${(props) => (props.draggingOver ? "#26e271" : "")};
 
   text-align: center;
-  padding: 20px;
+  padding: 60px 70px;
   cursor: pointer;
 
-  margin-bottom: 20px;
+  margin: 60px 0px 20px 0px;
 
   p {
     margin: 0;
-    font-size: 16px;
+    font-size: 1.1rem;
   }
 
   input {
@@ -71,6 +71,7 @@ export default function DropZone({ disabled, handleImageChange }: Props) {
     >
       <p>Drag &amp; Drop an image here or click to select one</p>
       <input
+        aria-label="File input"
         type="file"
         id="file-input"
         accept="image/*"

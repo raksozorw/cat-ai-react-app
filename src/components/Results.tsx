@@ -7,15 +7,28 @@ type Props = {
 
 export default function Results({ result }: Props) {
   return (
-    <div>
-      <h2>
+    <div
+      style={{
+        backgroundColor: "#ccc",
+        padding: "20px 50px",
+        margin: "auto",
+        marginTop: "40px",
+        borderRadius: "22px",
+        width: "240px",
+        textAlign: "left",
+      }}
+    >
+      <h2 style={{ display: "flex", justifyContent: "space-between" }}>
         Kitten:{" "}
-        <span style={{ textTransform: "capitalize" }}>{result.prediction}</span>
+        <span style={{ textTransform: "capitalize", fontWeight: "400" }}>
+          {result.prediction}
+        </span>
       </h2>
-      <h2>
+      <h2 style={{ display: "flex", justifyContent: "space-between" }}>
         Probability:{" "}
         <span
           style={{
+            fontWeight: "400",
             color: getColorFromValue(
               result.probabilities[result.prediction] * 100
             ),

@@ -3,38 +3,23 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
+  --positive-color: #37ff00;
+  --neutral-color: #ffee00;
+  --negative-color: #ff3c00;
 }
 
 body {
   background: linear-gradient(to bottom, #e4f0f7, #dad7db);
-  background-attachment: fixed;
+  font-family: "Archivo";
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes dreamyBackground {
+  0% {
+    background-position: 0% 0%;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  100% {
+    background-position: 100% 100%;
   }
 }
 

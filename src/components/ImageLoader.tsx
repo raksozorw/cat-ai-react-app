@@ -13,7 +13,7 @@ const StyledClearButton = styled.button`
   border-radius: 70px;
   position: absolute;
   padding: 5px 10px;
-  left: 470px;
+  right: 0px;
 `;
 
 function ImageLoader({ url, started, reset }: Props) {
