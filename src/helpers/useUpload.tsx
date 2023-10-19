@@ -7,7 +7,9 @@ const useUpload = () => {
   const [result, setResult] = useState<ModelResponse | null>(null);
   const [error, setError] = useState<string>("");
 
-  const apiUrl = "http://localhost:5000/predict";
+  //   const apiUrl = "http://localhost:5000/predict";
+
+  const apiUrl = "http://13.40.143.21/predict";
 
   const reset = () => {
     setResult(null);
@@ -15,6 +17,7 @@ const useUpload = () => {
     setError("");
   };
 
+  // handle errors better?
   const upload = useCallback(async (image: File | null) => {
     if (image) {
       setLoading(true);

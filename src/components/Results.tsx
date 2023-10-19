@@ -1,11 +1,21 @@
 import { ModelResponse } from "./Uploader";
 import getColorFromValue from "../helpers/getColor";
+import { useMemo } from "react";
 
 type Props = {
   result: ModelResponse;
 };
 
 export default function Results({ result }: Props) {
+  const prediction = useMemo(() => {
+    if (result.probabilities[result.prediction] < 90) {
+      return "Unknown";
+    } else {
+      return result.prediction;
+    }
+  }, [result]);
+
+  // TO DO: make styled component
   return (
     <div
       style={{
@@ -21,7 +31,7 @@ export default function Results({ result }: Props) {
       <h2 style={{ display: "flex", justifyContent: "space-between" }}>
         Kitten:{" "}
         <span style={{ textTransform: "capitalize", fontWeight: "400" }}>
-          {result.prediction}
+          {prediction}
         </span>
       </h2>
       <h2 style={{ display: "flex", justifyContent: "space-between" }}>
