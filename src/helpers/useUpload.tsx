@@ -4,15 +4,14 @@ import { ModelResponse } from "../components/Uploader";
 
 const useUpload = () => {
   const [loading, setLoading] = useState(false);
-  // move model response to a types file???
   const [result, setResult] = useState<ModelResponse | null>(null);
   const [error, setError] = useState<string>("");
 
-  // use local server (this will never work on BAI MacbBook)
-  const apiUrl = "http://localhost:80/predict";
+  // use local server (this will never work on BAI MacBook)
+  // const apiUrl = "http://localhost:80/predict";
 
   // use live server
-  // const apiUrl = "https://13.40.143.21/predict";
+  const apiUrl = "https://18.132.1.109/predict";
 
   const clearResult = () => {
     setResult(null);
