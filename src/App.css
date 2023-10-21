@@ -13,20 +13,3 @@ body {
   background: linear-gradient(to bottom, #e4f0f7, #dad7db);
   font-family: "Archivo";
 }
-
-@keyframes dreamyBackground {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 100% 100%;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}

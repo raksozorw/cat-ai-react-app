@@ -7,6 +7,9 @@ export const StyledUploader = styled.div`
   width: 800px;
   padding: 20px;
 
+  h1 {
+    font-size: 2.5rem;
+  }
   @media (max-width: 850px) {
     width: 90%;
   }

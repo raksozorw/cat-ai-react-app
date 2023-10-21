@@ -49,34 +49,33 @@ const DropZone = ({ disabled, handleImageChange, setError }: DropZoneProps) => {
 
     e.preventDefault();
 
-    const files = e.dataTransfer.files;
+    const droppedFile = e.dataTransfer?.files?.[0];
 
-    if (files.length > 0 && files[0].type.startsWith("image/")) {
-      handleImageChange(files[0]);
-    } else {
-      setError("Drop failed: check that your file type is correct.");
-    }
+    handleFile(droppedFile);
   };
 
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const selectedFile = e?.target?.files?.[0];
-
+  const handleFile = useCallback(
+    (selectedFile: File | null) => {
       if (selectedFile) {
-        // Check the file type
-        if (selectedFile.type.startsWith("image/")) {
-          // It's an image file, proceed with the upload.
+        if (selectedFile.type.startsWith("image/jpeg")) {
           handleImageChange(selectedFile);
         } else {
-          // It's not an image file, handle it as an error.
-          setError("Invalid file type. Please select an image file.");
+          setError("Invalid file type - image must be a jpeg.");
         }
       } else {
-        // No file selected, clear any previous errors.
         setError("");
       }
     },
     [handleImageChange, setError]
+  );
+
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const selectedFile = e?.target?.files?.[0];
+
+      handleFile(selectedFile || null);
+    },
+    [handleFile]
   );
 
   // necessary ref for creating a custom drop area
@@ -106,7 +105,7 @@ const DropZone = ({ disabled, handleImageChange, setError }: DropZoneProps) => {
         accept="image/jpeg"
         disabled={disabled}
         ref={fileInputRef}
-        onChange={handleChange}
+        onChange={onChange}
       />
     </StyledDropZone>
   );
