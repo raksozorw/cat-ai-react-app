@@ -9,7 +9,7 @@ const useUpload = () => {
 
   //   const apiUrl = "http://localhost:5000/predict";
 
-  const apiUrl = "http://13.40.143.21/predict";
+  const apiUrl = "https://13.40.143.21/predict";
 
   const reset = () => {
     setResult(null);
