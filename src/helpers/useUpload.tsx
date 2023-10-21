@@ -11,7 +11,7 @@ const useUpload = () => {
   // const apiUrl = "http://localhost:80/predict";
 
   // use live server
-  const apiUrl = "https://18.132.1.109/predict";
+  const apiUrl = "http://18.132.1.109/predict";
 
   const clearResult = () => {
     setResult(null);
