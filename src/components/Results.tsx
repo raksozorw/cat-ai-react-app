@@ -1,40 +1,59 @@
 import { ModelResponse } from "./Uploader";
 import getColorFromValue from "../helpers/getColor";
 import { useMemo } from "react";
+import { styled } from "styled-components";
 
-type Props = {
+const StyledResults = styled.div`
+  background-color: #ccc;
+  padding: 20px 50px;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 22px;
+  width: 240px;
+  @media (max-width: 850px) {
+    width: 160px;
+    padding: 20px 30px;
+
+    h2 {
+      font-size: 1rem;
+    }
+  }
+  text-align: left;
+`;
+
+const StyledHeader = styled.h2`
+  display: flex;
+  justify-content: space-between;
+`;
+
+type ResultsProps = {
   result: ModelResponse;
 };
 
-export default function Results({ result }: Props) {
+const Results = ({ result }: ResultsProps) => {
+  const percentPrediction = Math.floor(
+    result.probabilities[result.prediction] * 100
+  );
+
   const prediction = useMemo(() => {
-    if (result.probabilities[result.prediction] < 90) {
+    //TODO: make slider for user to decide threshold
+    // 90 is fairly arbitrary, mostly from my own tests on how accurate the current model is
+    if (percentPrediction < 90) {
       return "Unknown";
     } else {
       return result.prediction;
     }
-  }, [result]);
+  }, [result, percentPrediction]);
 
-  // TO DO: make styled component
   return (
-    <div
-      style={{
-        backgroundColor: "#ccc",
-        padding: "20px 50px",
-        margin: "auto",
-        marginTop: "40px",
-        borderRadius: "22px",
-        width: "240px",
-        textAlign: "left",
-      }}
-    >
-      <h2 style={{ display: "flex", justifyContent: "space-between" }}>
+    <StyledResults>
+      <StyledHeader>
         Kitten:{" "}
         <span style={{ textTransform: "capitalize", fontWeight: "400" }}>
           {prediction}
         </span>
-      </h2>
-      <h2 style={{ display: "flex", justifyContent: "space-between" }}>
+      </StyledHeader>
+      <StyledHeader>
         Probability:{" "}
         <span
           style={{
@@ -44,9 +63,11 @@ export default function Results({ result }: Props) {
             ),
           }}
         >
-          {Math.floor(result.probabilities[result.prediction] * 100)}%
+          {percentPrediction}%
         </span>
-      </h2>
-    </div>
+      </StyledHeader>
+    </StyledResults>
   );
-}
+};
+
+export default Results;

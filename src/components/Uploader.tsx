@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { StyledImageArea, StyledUploader } from "./Uploader.styled";
+import {
+  StyledError,
+  StyledImageArea,
+  StyledUploader,
+} from "./Uploader.styled";
 import Spinner from "./Spinner";
 import ImageLoader from "./ImageLoader";
 import Results from "./Results";
@@ -13,19 +17,19 @@ export type ModelResponse = {
   probabilities: { [key: string]: number };
 };
 
-export default function Uploader() {
+const Uploader = () => {
   const [image, setImage] = useState<File | null>(null);
   const [imageUploadStarted, setImageUploadStarted] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  const { upload, result, loading, uploadError, resetResult } = useUpload();
+  const { upload, result, loading, uploadError, clearResult } = useUpload();
 
   const reset = useCallback(() => {
-    resetResult();
+    clearResult();
     setImage(null);
     setImageUploadStarted(false);
     setError("");
-  }, [resetResult]);
+  }, [clearResult]);
 
   const handleImageChange = useCallback(
     (file: File | null) => {
@@ -38,6 +42,7 @@ export default function Uploader() {
   );
 
   const handleUpload = () => {
+    setError("");
     upload(image);
   };
 
@@ -62,15 +67,15 @@ export default function Uploader() {
           reset={reset}
         />
         {!image && (
-          <DropZone handleImageChange={handleImageChange} disabled={loading} />
+          <DropZone
+            handleImageChange={handleImageChange}
+            setError={setError}
+            disabled={loading}
+          />
         )}
       </StyledImageArea>
       {!result ? (
-        <button
-          data-testid="eval-button"
-          onClick={handleUpload}
-          disabled={loading || !image}
-        >
+        <button onClick={handleUpload} disabled={loading || !image}>
           {loading ? "Loading..." : "Evaluate"}
         </button>
       ) : (
@@ -79,7 +84,9 @@ export default function Uploader() {
 
       {loading && <Spinner />}
       {result && <Results result={result} />}
-      {error && <div style={{ color: "red" }}>{error}</div>}
+      {error && <StyledError>{error}</StyledError>}
     </StyledUploader>
   );
-}
+};
+
+export default Uploader;

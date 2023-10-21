@@ -3,7 +3,7 @@ import { StyledImagePreview } from "./Uploader.styled";
 import Spinner from "./Spinner";
 import { styled } from "styled-components";
 
-type Props = {
+type ImageLoaderProps = {
   url: string;
   started: boolean;
   reset: () => void;
@@ -16,7 +16,7 @@ const StyledClearButton = styled.button`
   right: 0px;
 `;
 
-function ImageLoader({ url, started, reset }: Props) {
+const ImageLoader = ({ url, started, reset }: ImageLoaderProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -48,6 +48,6 @@ function ImageLoader({ url, started, reset }: Props) {
       )}
     </div>
   );
-}
+};
 
 export default ImageLoader;

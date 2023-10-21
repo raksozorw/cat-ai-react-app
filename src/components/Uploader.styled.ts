@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledUploader = styled.div`
+  margin-top: 30px;
   border: 2px solid yellow;
   border-radius: 22px;
   width: 800px;
@@ -24,4 +25,9 @@ export const StyledImageArea = styled.div`
   justify-content: center;
   margin: 20px 0px;
   position: relative;
+`;
+
+export const StyledError = styled.div`
+  color: red;
+  margin-top: 20px;
 `;

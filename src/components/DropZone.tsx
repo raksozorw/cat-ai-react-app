@@ -1,14 +1,15 @@
 import React, { useCallback, useRef, useState } from "react";
 import { styled } from "styled-components";
 
-type Props = {
+type DropZoneProps = {
   disabled: boolean;
   handleImageChange: (file: File | null) => void;
+  setError: (message: string) => void;
 };
 
-interface StyledDropZoneProps {
+type StyledDropZoneProps = {
   draggingOver: boolean;
-}
+};
 
 const StyledDropZone = styled.div<StyledDropZoneProps>`
   border: 2px dashed #ccc;
@@ -30,7 +31,7 @@ const StyledDropZone = styled.div<StyledDropZoneProps>`
   }
 `;
 
-export default function DropZone({ disabled, handleImageChange }: Props) {
+const DropZone = ({ disabled, handleImageChange, setError }: DropZoneProps) => {
   const [draggingOver, setDraggingOver] = useState(false);
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -49,11 +50,36 @@ export default function DropZone({ disabled, handleImageChange }: Props) {
     e.preventDefault();
 
     const files = e.dataTransfer.files;
-    if (files.length > 0) {
+
+    if (files.length > 0 && files[0].type.startsWith("image/")) {
       handleImageChange(files[0]);
+    } else {
+      setError("Drop failed: check that your file type is correct.");
     }
   };
 
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const selectedFile = e?.target?.files?.[0];
+
+      if (selectedFile) {
+        // Check the file type
+        if (selectedFile.type.startsWith("image/")) {
+          // It's an image file, proceed with the upload.
+          handleImageChange(selectedFile);
+        } else {
+          // It's not an image file, handle it as an error.
+          setError("Invalid file type. Please select an image file.");
+        }
+      } else {
+        // No file selected, clear any previous errors.
+        setError("");
+      }
+    },
+    [handleImageChange, setError]
+  );
+
+  // necessary ref for creating a custom drop area
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const handleClick = useCallback(() => {
@@ -63,22 +89,27 @@ export default function DropZone({ disabled, handleImageChange }: Props) {
   return (
     <StyledDropZone
       className="drop-zone"
-      onDragOver={(e) => handleDragOver(e)}
-      onDragLeave={(e) => handleDragLeave(e)}
-      onDrop={(e) => handleDrop(e)}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
       onClick={handleClick}
       draggingOver={draggingOver}
     >
-      <p>Drag &amp; Drop an image here or click to select one</p>
+      <p>Drag &amp; drop an image here or click to select one</p>
+      <p style={{ fontSize: "0.8rem", marginTop: "10px" }}>
+        Image must be jpeg format
+      </p>
       <input
         aria-label="File input"
         type="file"
         id="file-input"
-        accept="image/*"
+        accept="image/jpeg"
         disabled={disabled}
         ref={fileInputRef}
-        onChange={(e) => handleImageChange(e?.target?.files?.[0] || null)}
+        onChange={handleChange}
       />
     </StyledDropZone>
   );
-}
+};
+
+export default DropZone;
