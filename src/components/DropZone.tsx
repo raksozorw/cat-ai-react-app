@@ -8,12 +8,15 @@ type DropZoneProps = {
 };
 
 type StyledDropZoneProps = {
-  draggingOver: boolean;
+  $isDraggingOver: boolean;
 };
 
 const StyledDropZone = styled.div<StyledDropZoneProps>`
   border: 2px dashed #ccc;
-  border-color: ${(props) => (props.draggingOver ? "#26e271" : "")};
+  border-color: ${(props) =>
+    props.$isDraggingOver
+      ? "#26e271"
+      : ""}; // getting warnings for this, TODO: refactor
 
   text-align: center;
   padding: 60px 70px;
@@ -87,12 +90,12 @@ const DropZone = ({ disabled, handleImageChange, setError }: DropZoneProps) => {
 
   return (
     <StyledDropZone
-      className="drop-zone"
+      data-testid="dropzone"
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       onClick={handleClick}
-      draggingOver={draggingOver}
+      $isDraggingOver={draggingOver}
     >
       <p>Drag &amp; drop an image here or click to select one</p>
       <p style={{ fontSize: "0.8rem", marginTop: "10px" }}>

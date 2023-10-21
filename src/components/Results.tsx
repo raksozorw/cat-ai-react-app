@@ -50,7 +50,7 @@ const Results = ({ result }: ResultsProps) => {
       <StyledHeader>
         Kitten:{" "}
         <span style={{ textTransform: "capitalize", fontWeight: "400" }}>
-          {prediction}
+          {prediction + "!"}
         </span>
       </StyledHeader>
       <StyledHeader>
