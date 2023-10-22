@@ -19,7 +19,7 @@ export type ModelResponse = {
 
 const Uploader = () => {
   const [image, setImage] = useState<File | null>(null);
-  const [imageUploadStarted, setImageUploadStarted] = useState<boolean>(false);
+  const [imageSelected, setImageSelected] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
   const { upload, result, loading, uploadError, clearResult } = useUpload();
@@ -27,14 +27,14 @@ const Uploader = () => {
   const reset = useCallback(() => {
     clearResult();
     setImage(null);
-    setImageUploadStarted(false);
+    setImageSelected(false);
     setError("");
   }, [clearResult]);
 
   const handleImageChange = useCallback(
     (file: File | null) => {
       reset();
-      setImageUploadStarted(true);
+      setImageSelected(true);
       setImage(file);
       setError("");
     },
@@ -62,7 +62,7 @@ const Uploader = () => {
       </p>
       <StyledImageArea>
         <ImageLoader
-          started={imageUploadStarted}
+          imageSelected={imageSelected}
           url={image ? URL.createObjectURL(image) : ""}
           reset={reset}
         />

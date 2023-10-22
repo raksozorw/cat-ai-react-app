@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 
 type ImageLoaderProps = {
   url: string;
-  started: boolean;
+  imageSelected: boolean;
   reset: () => void;
 };
 
@@ -16,7 +16,7 @@ const StyledClearButton = styled.button`
   right: 0px;
 `;
 
-const ImageLoader = ({ url, started, reset }: ImageLoaderProps) => {
+const ImageLoader = ({ url, imageSelected, reset }: ImageLoaderProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -31,15 +31,15 @@ const ImageLoader = ({ url, started, reset }: ImageLoaderProps) => {
 
   return (
     <div>
-      {started && (
+      {imageSelected && (
         <div style={{ position: "relative" }}>
           <StyledClearButton onClick={reset}>X</StyledClearButton>
-          {isLoading && <Spinner />}
+          {isLoading && <Spinner data-testid="spinner" />}
           {isError && <div>Error loading image</div>}
           {url && !isLoading && !isError && (
             <StyledImagePreview
               src={url}
-              alt="Loaded Image"
+              alt="Uploaded image preview"
               onLoad={handleImageLoad}
               onError={handleImageError}
             />

@@ -7,8 +7,8 @@ describe("DropZone", () => {
     render(
       <DropZone
         disabled={false}
-        handleImageChange={() => null}
-        setError={() => null}
+        handleImageChange={jest.fn()}
+        setError={jest.fn()}
       />
     );
     // can't get the text of children of StyledDropZone for some reason, need to investigate
