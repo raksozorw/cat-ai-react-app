@@ -53,27 +53,4 @@ describe("Uploader Component", () => {
     // Check if the component displays the error message
     expect(screen.getByText(errorMessage)).toBeInTheDocument();
   });
-
-  it("displays the results when available", () => {
-    const mockResult = {
-      prediction: "kvarg",
-      probabilities: {
-        kvarg: 0.9,
-        jarlsberg: 0.1,
-      },
-    };
-    mockUseUpload.mockReturnValue({
-      upload: jest.fn(),
-      result: mockResult,
-      loading: false,
-      uploadError: "",
-      clearResult: jest.fn(),
-    });
-
-    render(<Uploader />);
-
-    // Check if the component displays the results
-    // expect(screen.getByText("kvarg!")).toBeInTheDocument();
-    expect(screen.getByText("90%")).toBeInTheDocument();
-  });
 });

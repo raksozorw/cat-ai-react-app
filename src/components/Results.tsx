@@ -35,10 +35,11 @@ const Results = ({ result }: ResultsProps) => {
     result.probabilities[result.prediction] * 100
   );
 
+  const threshold = 90; // 90 is fairly arbitrary, mostly from my own tests on how accurate the current model is
+  //TODO: make slider for user to decide threshold
+
   const prediction = useMemo(() => {
-    //TODO: make slider for user to decide threshold
-    // 90 is fairly arbitrary, mostly from my own tests on how accurate the current model is
-    if (percentPrediction < 90) {
+    if (percentPrediction < threshold) {
       return "Unknown";
     } else {
       return result.prediction;
@@ -53,19 +54,21 @@ const Results = ({ result }: ResultsProps) => {
           {prediction + "!"}
         </span>
       </StyledHeader>
-      <StyledHeader>
-        Probability:{" "}
-        <span
-          style={{
-            fontWeight: "400",
-            color: getColorFromValue(
-              result.probabilities[result.prediction] * 100
-            ),
-          }}
-        >
-          {percentPrediction}%
-        </span>
-      </StyledHeader>
+      {percentPrediction > threshold && (
+        <StyledHeader>
+          Probability:{" "}
+          <span
+            style={{
+              fontWeight: "400",
+              color: getColorFromValue(
+                result.probabilities[result.prediction] * 100
+              ),
+            }}
+          >
+            {percentPrediction}%
+          </span>
+        </StyledHeader>
+      )}
     </StyledResults>
   );
 };

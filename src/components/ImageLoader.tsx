@@ -1,7 +1,13 @@
 import { useState } from "react";
-import { StyledImagePreview } from "./Uploader.styled";
 import Spinner from "./Spinner";
 import { styled } from "styled-components";
+
+const StyledImagePreview = styled.img`
+  width: 200px;
+  max-height: 280px;
+  margin-bottom: 20px;
+  border-radius: 22px;
+`;
 
 type ImageLoaderProps = {
   url: string;

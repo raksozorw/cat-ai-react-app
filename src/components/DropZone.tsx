@@ -13,10 +13,8 @@ type StyledDropZoneProps = {
 
 const StyledDropZone = styled.div<StyledDropZoneProps>`
   border: 2px dashed #ccc;
-  border-color: ${(props) =>
-    props.$isDraggingOver
-      ? "#26e271"
-      : ""}; // getting warnings for this, TODO: refactor
+  border-color: ${(props) => (props.$isDraggingOver ? "#26e271" : "")};
+  border-radius: 22px;
 
   text-align: center;
   padding: 60px 70px;

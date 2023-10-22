@@ -15,18 +15,12 @@ export const StyledUploader = styled.div`
   }
 `;
 
-export const StyledImagePreview = styled.img`
-  width: 200px;
-  margin-bottom: 20px;
-  border-radius: 22px;
-`;
-
 export const StyledImageArea = styled.div`
   height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0px;
+  margin: 40px 0px 30px 0px;
   position: relative;
 `;
 

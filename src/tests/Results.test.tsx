@@ -33,7 +33,7 @@ describe("Results Component", () => {
     expect(screen.getByText("99%")).toBeInTheDocument();
   });
 
-  it('displays "Unknown" if the prediction probability is less than 90%', () => {
+  it('displays only "Unknown" if the prediction probability is less than 90%', () => {
     const lowProbabilityResult = {
       prediction: "kvarg",
       probabilities: {

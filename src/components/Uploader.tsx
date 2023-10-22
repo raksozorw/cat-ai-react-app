@@ -61,12 +61,13 @@ const Uploader = () => {
         Upload an image{description} <FlashingCursor>_</FlashingCursor>
       </p>
       <StyledImageArea>
-        <ImageLoader
-          imageSelected={imageSelected}
-          url={image ? URL.createObjectURL(image) : ""}
-          reset={reset}
-        />
-        {!image && (
+        {image ? (
+          <ImageLoader
+            imageSelected={imageSelected}
+            url={URL.createObjectURL(image)}
+            reset={reset}
+          />
+        ) : (
           <DropZone
             handleImageChange={handleImageChange}
             setError={setError}
