@@ -19,8 +19,6 @@ describe("Uploader Component", () => {
 
     render(<Uploader />);
 
-    // check for the dropzone text:
-
     // check for the button:
     expect(screen.getByText("Evaluate")).toBeInTheDocument();
   });
