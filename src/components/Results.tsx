@@ -6,8 +6,7 @@ import { styled } from "styled-components";
 const StyledResults = styled.div`
   background-color: #ccc;
   padding: 20px 50px;
-  margin: auto;
-  margin-top: 40px;
+  margin: 40px auto 20px auto;
   border-radius: 22px;
   width: 240px;
   @media (max-width: 850px) {

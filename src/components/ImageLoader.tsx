@@ -15,7 +15,6 @@ const StyledWrapper = styled.div`
 
 type ImageLoaderProps = {
   url: string;
-  imageSelected: boolean;
   reset: () => void;
 };
 
@@ -26,7 +25,7 @@ const StyledClearButton = styled.button`
   right: 0px;
 `;
 
-const ImageLoader = ({ url, imageSelected, reset }: ImageLoaderProps) => {
+const ImageLoader = ({ url, reset }: ImageLoaderProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -41,21 +40,19 @@ const ImageLoader = ({ url, imageSelected, reset }: ImageLoaderProps) => {
 
   return (
     <div>
-      {imageSelected && (
-        <StyledWrapper>
-          <StyledClearButton onClick={reset}>X</StyledClearButton>
-          {isLoading && <Spinner data-testid="spinner" />}
-          {isError && <div>Error loading image</div>}
-          {url && !isLoading && !isError && (
-            <StyledImagePreview
-              src={url}
-              alt="Uploaded image preview"
-              onLoad={handleImageLoad}
-              onError={handleImageError}
-            />
-          )}
-        </StyledWrapper>
-      )}
+      <StyledWrapper>
+        <StyledClearButton onClick={reset}>X</StyledClearButton>
+        {isLoading && <Spinner data-testid="spinner" />}
+        {isError && <div>Error loading image</div>}
+        {url && !isLoading && !isError && (
+          <StyledImagePreview
+            src={url}
+            alt="Uploaded image preview"
+            onLoad={handleImageLoad}
+            onError={handleImageError}
+          />
+        )}
+      </StyledWrapper>
     </div>
   );
 };
