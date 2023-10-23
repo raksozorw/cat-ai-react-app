@@ -8,10 +8,10 @@ const useUpload = () => {
   const [error, setError] = useState<string>("");
 
   // use local server (Docker image connection will never work on BAI MacBook)
-  const apiUrl = "http://localhost:80/predict";
+  // const apiUrl = "http://localhost:80/predict";
 
   // use live server
-  // const apiUrl = "http://18.132.1.109/predict";
+  const apiUrl = "http://18.132.1.109/predict";
 
   const clearResult = () => {
     setResult(null);
