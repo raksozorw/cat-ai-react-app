@@ -8,10 +8,10 @@ const useUpload = () => {
   const [error, setError] = useState<string>("");
 
   // use local server (Docker image connection will never work on BAI MacBook)
-  // const apiUrl = "http://localhost:80/predict";
+  const apiUrl = "http://localhost:80/predict";
 
   // use live server
-  const apiUrl = "http://18.132.1.109/predict";
+  // const apiUrl = "http://18.132.1.109/predict";
 
   const clearResult = () => {
     setResult(null);
@@ -20,6 +20,7 @@ const useUpload = () => {
   };
 
   const upload = useCallback(async (image: File | null) => {
+    setError("");
     if (image) {
       setLoading(true);
 
@@ -31,6 +32,7 @@ const useUpload = () => {
         setLoading(false);
         if (response.data.prediction) {
           setResult(response.data);
+          setError("");
         } else {
           setError("Something went wrong – the image could not be processed.");
         }
@@ -41,7 +43,7 @@ const useUpload = () => {
         setLoading(false);
         console.error(error);
         setResult(null);
-        setError(`${axiosErr.code} – ${axiosErr.message}`);
+        setError(`${axiosErr.message}`);
       }
     } else {
       setError("No image selected");

@@ -42,7 +42,6 @@ const Uploader = () => {
   );
 
   const handleUpload = () => {
-    setError("");
     upload(image);
   };
 

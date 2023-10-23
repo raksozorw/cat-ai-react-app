@@ -32,6 +32,11 @@ const StyledDropZone = styled.div<StyledDropZoneProps>`
   }
 `;
 
+const StyledInfoMsg = styled.p`
+  font-size: 0.8rem;
+  margin-top: 10px;
+`;
+
 const DropZone = ({ disabled, handleImageChange, setError }: DropZoneProps) => {
   const [draggingOver, setDraggingOver] = useState(false);
 
@@ -94,11 +99,16 @@ const DropZone = ({ disabled, handleImageChange, setError }: DropZoneProps) => {
       onDrop={handleDrop}
       onClick={handleClick}
       $isDraggingOver={draggingOver}
+      role="button" // following properties for accessbilitiy
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") {
+          handleClick();
+        }
+      }}
     >
       <p>Drag &amp; drop an image here or click to select one</p>
-      <p style={{ fontSize: "0.8rem", marginTop: "10px" }}>
-        Image must be jpeg format
-      </p>
+      <StyledInfoMsg>Image must be jpeg format</StyledInfoMsg>
       <input
         aria-label="File input"
         type="file"

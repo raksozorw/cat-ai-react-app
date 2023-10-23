@@ -12,6 +12,8 @@ Make sure you have node and npm installed and run `npm i` to install dependencie
 
 To run a preview, just run `npm run dev`.
 
+Before uploading images, ensure the [backend](https://github.com/raksozorw/cat-ai) is running on port 80 (recommended), or set Fargate public IP as the `apiUrl` in `useUpload`.
+
 ### Test
 
 Unit testing is done with Jest + React Testing Library, simply run `npm run test`
