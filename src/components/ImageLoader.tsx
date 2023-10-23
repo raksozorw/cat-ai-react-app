@@ -9,6 +9,10 @@ const StyledImagePreview = styled.img`
   border-radius: 22px;
 `;
 
+const StyledWrapper = styled.div`
+  position: relative;
+`;
+
 type ImageLoaderProps = {
   url: string;
   imageSelected: boolean;
@@ -38,7 +42,7 @@ const ImageLoader = ({ url, imageSelected, reset }: ImageLoaderProps) => {
   return (
     <div>
       {imageSelected && (
-        <div style={{ position: "relative" }}>
+        <StyledWrapper>
           <StyledClearButton onClick={reset}>X</StyledClearButton>
           {isLoading && <Spinner data-testid="spinner" />}
           {isError && <div>Error loading image</div>}
@@ -50,7 +54,7 @@ const ImageLoader = ({ url, imageSelected, reset }: ImageLoaderProps) => {
               onError={handleImageError}
             />
           )}
-        </div>
+        </StyledWrapper>
       )}
     </div>
   );
